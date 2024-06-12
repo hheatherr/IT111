@@ -9,83 +9,89 @@ public class dailySpecials {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Please enter a day of the week excluding weekends (Monday - Friday only.)");
-
-        specials = input.next();
-
-//        System.out.println("");
-
-
         // in the world of coffee I need a  name of a coffee beverage and a price
 
-        String coffee;
-        double price;
+        String coffee = null;
+        double price = 0;
         int lattes = 1;
+        boolean wrongDay = true;
 
 
-        boolean saturday = specials.equals("Saturday");
-        boolean sunday = specials.equals("Sunday");
-
-        if (saturday || sunday) {
-            System.out.println("Please enter a weekday, not weekend.");
+        while (wrongDay) {
+            System.out.println("Please enter a day of the week excluding weekends (Monday - Friday only.)");
             specials = input.next();
-        }
-
-        switch (specials) {
-
-            // my cases will be the day of the week.
-            case "Monday":
-                coffee = "Latte";
-                price = 4.95;
-                System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
-                break;
-
-            case "Tuesday":
-                coffee = "Frapp";
-                price = 5.95;
-                System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
-                break;
-            case "Wednesday":
-                coffee = "Cappuccino";
-                price = 4.35;
-                System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
-                break;
-            case "Thursday":
-                coffee = "Regular Joe";
-                price = 2.95;
-                System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
-                break;
-            case "Friday":
-                coffee = "Green Tea Latte";
-                price = 6.95;
-                System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
-                break;
-        }
-
-//        Scanner lattes = new Scanner(System.in);
-        System.out.println("How many Lattes would you like to order?");
-
-        price = 4.95;
-        double total;
-        lattes = input.nextInt();
 
 
+            switch (specials) {
 
-        if (lattes < 1) {
-            System.out.println("Looks like you don't like Lattes! So sad!!");
-        } else if (lattes > 1) {
-            total = lattes * price;
+                case "Monday" -> {
+                    wrongDay = false;
+                    coffee = "Latte";
+                    price = 4.95;
+                    System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
+                }
 
-            System.out.println(lattes+ " Lattes have been ordered totalling");
-            System.out.printf("$%.2f", total);
+                case "Tuesday" -> {
+                    wrongDay = false;
+                    coffee = "Frapp";
+                    price = 5.95;
+                    System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
+                }
+                case "Wednesday" -> {
+                    wrongDay = false;
+                    coffee = "Cappuccino";
+                    price = 4.35;
+                    System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
+                }
+                case "Thursday" -> {
+                    wrongDay = false;
+                    coffee = "Regular Joe";
+                    price = 2.95;
+                    System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
+                }
+                case "Friday" -> {
+                    wrongDay = false;
+                    coffee = "Green Tea Latte";
+                    price = 6.95;
+                    System.out.println(specials + "'s coffee of the day is a " + coffee + " and the price will be $" + price);
+
+                }
+            }
         }
 
 
-        if (lattes == 1) {
+//        //Scanner lattes = new Scanner(System.in);
+            System.out.println("How many " +coffee+ "s would you like to order?");
+            int number = input.nextInt();
+            double money = number * price;
 
-            System.out.println("Looks like you will be ordering only " + lattes + " Latte today!");
-        }
+
+
+            if (number == 0) {
+                System.out.println("Looks like you don't like " +coffee+ " , so sad!!");
+
+            } else if (number > 0 && number <5) {
+                System.out.println(number + " " +coffee+ " have been ordered totalling $" +money+ " dollars!");
+
+            } else if (number >=5 && number <10) {
+
+                double moneyWithDiscount = money * 0.9;
+
+                System.out.println("Looks like you qualify for a group discount! Your regular price is $" +money);
+                System.out.print("You have ordered " + number + " coffee with a 10% discount so you will only be charged $");
+                System.out.printf("%.2f", moneyWithDiscount);
+                System.out.println(" dollars");
+
+            } else if(number >= 10) {
+                double moneyWithDiscount = money * 0.8;
+
+                System.out.print("A bigger group discount! Your regular price is $");
+                System.out.printf("%.2f", money);
+                System.out.println(" dollars");
+                System.out.print("You have ordered " + number + " coffees with a 20% discount and will only be charged $");
+                System.out.printf("%.2f", moneyWithDiscount);
+                System.out.println(" dollars.");
+            }
 
     }
-
 }
